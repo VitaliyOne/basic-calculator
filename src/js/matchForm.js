@@ -7,7 +7,7 @@ export function subtract(minuend, subtrahend) {
 }
 
 export function multiplication(multiplicanda, multiplier){
-    return multiplicanda *  multiplier;
+    return multiplicanda * multiplier;
 }
 
 export function division(dividend, divisor) {
@@ -19,14 +19,13 @@ export function getPercent(number) {
 }
 
 export function check(str) {
-    const strLS = str.slice(-1);//последний символ строки
+    const strLS = str.slice(-1);//взять последний символ строки для проверки
     if (strLS === '+' || strLS === '-' || strLS === '/' || strLS === '*' || strLS === '.' || strLS === '%') {
         return true;
     } else {
         return false;
     }   
 }
-
 
 export function calculateExpression(expression) {
     // Разбиение строки на операнды и операторы
@@ -80,7 +79,6 @@ export function calculateExpression(expression) {
 
     // Выполнение операций сложения и вычитания
     let result = parseFloat(tokens[0]);
-
     for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];
 
@@ -98,6 +96,5 @@ export function calculateExpression(expression) {
             }
         }
     }
-
     return Math.round(result*100000)/100000;
 }

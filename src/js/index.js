@@ -82,7 +82,6 @@ subNumber.onclick = function(event) {
     }
 }
 
-
 division.onclick = function(event) {
     if (matchForm.check(resultExpression.value)) {
         del.onclick();
@@ -91,7 +90,6 @@ division.onclick = function(event) {
         btnClick(`/`);
     }
 }
-
 
 multiplication.onclick = function(event) {
     if (matchForm.check(resultExpression.value)) {
@@ -110,7 +108,6 @@ getPercent.onclick = function(event) {
         btnClick(`%`);
     }
 }
-
 
 del.onclick = function(event) {
     if (resultExpression) {
