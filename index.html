@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+		<title>HTML Template</title>
+		<link rel="stylesheet" href="src/css/style.css"/>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<form class="calculator_form" onsubmit="return false"> 
+			<input type="text" id="resultExpression" class="resultExpressionText" oninput="this.value = this.value.replace(/[^0-9.\-+/ *%]/g, '');"/>
+			<div class="panelButtons">
+			<input type="button" id="clear" value="c" class="buttonNumber"/>
+
+			<input type="button" id="division" value="&#247;" class="buttonNumber"/>
+
+			<input type="button" id="multiplication" value="&#215;" class="buttonNumber"/> 
+			
+			<input type="button" id="del" value="&#9003;" class="buttonNumber"/>
+			
+			<input type="button" id="seven" value="7" class="buttonNumber"/>
+			
+			<input type="button" id="eight" value="8" class="buttonNumber"/>
+			
+			<input type="button" id="nine" value="9" class="buttonNumber"/>
+			
+			<input type="button" id="subNumber" value="-" class="buttonNumber"/>
+			
+			<input type="button" id="four" value="4" class="buttonNumber"/>
+			
+			<input type="button" id="five" value="5" class="buttonNumber"/>
+			
+			<input type="button" id="six" value="6" class="buttonNumber"/>
+
+			<input type="button" id="sumNumber" value="+" class="buttonNumber"/>
+
+			<input type="button" id="one" value="1" class="buttonNumber"/>
+			
+			<input type="button" id="two" value="2" class="buttonNumber"/>
+			
+			<input type="button" id="three" value="3" class="buttonNumber"/>
+
+			<input type="button" id="getResult" value="=" class="buttonNumber buttonResult"/>
+			
+			<input type="button" id="getPercent" value="%" class="buttonNumber"/>
+			
+			<input type="button" id="zero" value="0" class="buttonNumber"/>
+			
+			<input type="button" id="point" value="," class="buttonNumber"/>
+			</div>
+		</form>
+
+		<script type="module" src="src/js/index.js"></script>
+	</body>
+</html>
