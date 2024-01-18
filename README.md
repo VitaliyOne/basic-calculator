@@ -1,15 +1,17 @@
-# HTML Starter Template
+## Basic calculator
 
-## Установка
 
-Требования:
+Live demo: https://vitaliyone.github.io/basic-calculator/
+## Installation
+
+Requirements:
 
 - NodeJS: https://nodejs.org/en/
 
 ```bash
-# установить зависимости
+# install dependencies
 $ npm install
 
-# запуск
+# launch
 $ npm start
 ```
