@@ -3,7 +3,17 @@ import * as matchForm from './matchForm.js';
 const resultExpression = document.getElementById('resultExpression');
 const panelButtons = document.querySelector('.panelButtons');
 
+let lastOperator = null;
+let lastOperand = null;
+let justCalculated = false;
+
 resultExpression.addEventListener('input', () => {
+    if (justCalculated) {
+        lastOperator = null;
+        lastOperand = null;
+        justCalculated = false;
+    }
+
     resultExpression.value = resultExpression.value.replace(/[^0-9.+*\/%\-]/g, '');
 
     const parts = resultExpression.value.split(/([+\-*/%])/);
@@ -57,25 +67,47 @@ function handleValue(value) {
     }
 
     resultExpression.value += value;
+    justCalculated = false;
 }
 
 function handleAction(action) {
     switch (action) {
         case 'c':
             resultExpression.value = '';
+            lastOperator = null;
+            lastOperand = null;
+            justCalculated = false;
             break;
 
         case 'backspace':
             resultExpression.value = resultExpression.value.slice(0, -1);
+            justCalculated = false;
             break;
 
         case '=':
-            try {
+            if (!resultExpression.value) return;
+
+            if (justCalculated && lastOperator && lastOperand !== null) {
+                resultExpression.value = String(
+                    matchForm.calculateExpression(
+                        resultExpression.value + lastOperator + lastOperand
+                    )
+                );
+            } else {
+                const match = resultExpression.value.match(/([+\-*/%])(\d+(\.\d+)?)$/);
+                if (match) {
+                    lastOperator = match[1];
+                    lastOperand = match[2];
+                } else {
+                    lastOperator = null;
+                    lastOperand = null;
+                }
+
                 resultExpression.value = String(
                     matchForm.calculateExpression(resultExpression.value)
                 );
-            } catch {
-                resultExpression.value = 'Error';
+
+                justCalculated = true;
             }
             break;
     }
