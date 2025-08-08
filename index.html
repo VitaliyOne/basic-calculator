@@ -19,11 +19,11 @@
 		<form class="calculatorForm" role="application" aria-label="Calculator">
 
 			<div class="calculator-display">
-				<input type="text" id="resultExpression" class="resultExpressionText" oninput="this.value = this.value.replace(/[^0-9.\-+/ *%]/g, '');"/>
+				<input type="text" id="resultExpression" autocomplete="off" class="resultExpressionText" oninput="this.value = this.value.replace(/[^0-9.\-+/ *%]/g, '');"/>
 			</div>
 
 			<div class="panelButtons" role="group" aria-label="Calculator buttons">
-				<button type="button" data-value="c" class="buttonNumber button-clear" aria-label="Clear">
+				<button type="button" data-action="c" class="buttonNumber button-clear" aria-label="Clear">
 					C
 				</button>
 				<button type="button" data-value="/" class="buttonNumber button-operator" aria-label="Division">
@@ -32,7 +32,7 @@
 				<button type="button" data-value="*" class="buttonNumber button-operator" aria-label="Multiplication">
 					×
 				</button>
-				<button type="button" data-value="backspace" class="buttonNumber button-delete" aria-label="Remove last character">
+				<button type="button" data-action="backspace" class="buttonNumber button-delete" aria-label="Remove last character">
 					⌫
 				</button>
 
@@ -71,7 +71,7 @@
 				<button type="button" data-value="3" class="buttonNumber button-digit" aria-label="3">
 					3
 				</button>
-				<button type="button" data-value="=" class="buttonNumber buttonResult" aria-label="Calculate the result">
+				<button type="button" data-action="=" class="buttonNumber buttonResult" aria-label="Calculate the result">
 					=
 				</button>
 
