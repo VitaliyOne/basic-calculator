@@ -1,7 +1,9 @@
-.calculator_form {
+.calculatorForm {
     background-color: rgba(24, 49, 66, 0.7);
     grid-template-columns: 1fr 1fr 1fr;
-    position: fixed; top: 50%; left: 50%;
+    position: fixed; 
+    top: 50%; 
+    left: 50%;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);

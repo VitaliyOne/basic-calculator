@@ -1,61 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="./src/img/icon-calculator.svg">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-		<title>Basic calculator</title>
-		<link rel="stylesheet" href="src/css/style.css"/>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-	</head>
-	<body>
-		<form class="calculator_form" onsubmit="return false"> 
-			<input type="text" id="resultExpression" class="resultExpressionText" oninput="this.value = this.value.replace(/[^0-9.\-+/ *%]/g, '');"/>
-			
-			<div class="panelButtons">
-			<input type="button" id="clear" value="c" class="buttonNumber"/>
 
-			<input type="button" id="division" value="&#247;" class="buttonNumber"/>
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/svg+xml" href="./src/img/icon-calculator.svg">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+	<meta name="description" content="A simple and convenient calculator for performing mathematical operations"/>
+	<title>Basic calculator</title>
+	<link rel="stylesheet" href="src/css/style.css"/>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
 
-			<input type="button" id="multiplication" value="&#215;" class="buttonNumber"/> 
-			
-			<input type="button" id="del" value="&#9003;" class="buttonNumber"/>
-			
-			<input type="button" id="seven" value="7" class="buttonNumber"/>
-			
-			<input type="button" id="eight" value="8" class="buttonNumber"/>
-			
-			<input type="button" id="nine" value="9" class="buttonNumber"/>
-			
-			<input type="button" id="subNumber" value="-" class="buttonNumber"/>
-			
-			<input type="button" id="four" value="4" class="buttonNumber"/>
-			
-			<input type="button" id="five" value="5" class="buttonNumber"/>
-			
-			<input type="button" id="six" value="6" class="buttonNumber"/>
+<body>
+	<main class="calculator-container">
+		<form class="calculatorForm" role="application" aria-label="Calculator">
 
-			<input type="button" id="sumNumber" value="+" class="buttonNumber"/>
+			<div class="calculator-display">
+				<input type="text" id="resultExpression" autocomplete="off" class="resultExpressionText"/>
+			</div>
 
-			<input type="button" id="one" value="1" class="buttonNumber"/>
-			
-			<input type="button" id="two" value="2" class="buttonNumber"/>
-			
-			<input type="button" id="three" value="3" class="buttonNumber"/>
+			<div class="panelButtons" role="group" aria-label="Calculator buttons">
+				<button type="button" data-action="c" class="buttonNumber button-clear" aria-label="Clear">
+					C
+				</button>
+				<button type="button" data-value="/" class="buttonNumber button-operator" aria-label="Division">
+					÷
+				</button>
+				<button type="button" data-value="*" class="buttonNumber button-operator" aria-label="Multiplication">
+					×
+				</button>
+				<button type="button" data-action="backspace" class="buttonNumber button-delete" aria-label="Remove last character">
+					⌫
+				</button>
 
-			<input type="button" id="getResult" value="=" class="buttonNumber buttonResult"/>
-			
-			<input type="button" id="getPercent" value="%" class="buttonNumber"/>
-			
-			<input type="button" id="zero" value="0" class="buttonNumber"/>
-			
-			<input type="button" id="point" value="," class="buttonNumber"/>
+				<button type="button" data-value="7" class="buttonNumber button-digit" aria-label="7">
+					7
+				</button>
+				<button type="button" data-value="8" class="buttonNumber button-digit" aria-label="8">
+					8
+				</button>
+				<button type="button" data-value="9" class="buttonNumber button-digit" aria-label="9">
+					9
+				</button>
+				<button type="button" data-value="-" class="buttonNumber button-operator" aria-label="Subtraction">
+					−
+				</button>
+
+				<button type="button" data-value="4" class="buttonNumber button-digit" aria-label="4">
+					4
+				</button>
+				<button type="button" data-value="5" class="buttonNumber button-digit" aria-label="5">
+					5
+				</button>
+				<button type="button" data-value="6" class="buttonNumber button-digit" aria-label="6">
+					6
+				</button>
+				<button type="button" data-value="+" class="buttonNumber button-operator" aria-label="Addition">
+					+
+				</button>
+
+				<button type="button" data-value="1" class="buttonNumber button-digit" aria-label="1">
+					1
+				</button>
+				<button type="button" data-value="2" class="buttonNumber button-digit" aria-label="2">
+					2
+				</button>
+				<button type="button" data-value="3" class="buttonNumber button-digit" aria-label="3">
+					3
+				</button>
+				<button type="button" data-action="=" class="buttonNumber buttonResult" aria-label="Calculate the result">
+					=
+				</button>
+
+				<button type="button" data-value="%" class="buttonNumber button-operator" aria-label="Percent">
+					%
+				</button>
+				<button type="button" data-value="0" class="buttonNumber button-digit" aria-label="0">
+					0
+				</button>
+				<button type="button" data-value="." class="buttonNumber button-digit" aria-label="Point">
+					.
+				</button>
 			</div>
 		</form>
-		
-		<script type="module" src="src/js/index.js"></script>
-	</body>
+	</main>
+
+	<script type="module" src="src/js/index.js"></script>
+</body>
+
 </html>

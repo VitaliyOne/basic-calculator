@@ -1,128 +1,89 @@
-// скрипты
 import * as matchForm from './matchForm.js';
 
-const resultExpression = document.getElementById("resultExpression");
+const resultExpression = document.getElementById('resultExpression');
+const panelButtons = document.querySelector('.panelButtons');
 
-function btnClick(num) {
-    if (resultExpression) {
-    resultExpression.value = resultExpression.value + num;
+resultExpression.addEventListener('input', () => {
+    resultExpression.value = resultExpression.value.replace(/[^0-9.+*\/%\-]/g, '');
+
+    const parts = resultExpression.value.split(/([+\-*/%])/);
+
+    for (let i = 0; i < parts.length; i++) {
+        if (/[+\-*/%]/.test(parts[i])) continue;
+
+        const firstDot = parts[i].indexOf('.');
+        if (firstDot !== -1) {
+            parts[i] = parts[i].slice(0, firstDot + 1) + parts[i].slice(firstDot + 1).replace(/\./g, '');
+        }
     }
-}
 
-clear.onclick = function(event) {
-    if (resultExpression) {
-    resultExpression.value = '';
+    for (let i = 1; i < parts.length; i++) {
+        if (/[+\-*/%]/.test(parts[i]) && /[+\-*/%]/.test(parts[i - 1])) {
+            parts.splice(i, 1);
+            i--;
+        }
     }
-}
 
-zero.onclick = function(event) {
-    btnClick(0);
-}
-
-one.onclick = function(event) {
-    btnClick(1);
-}
-
-two.onclick = function(event) {
-    btnClick(2);
-}
-
-three.onclick = function(event) {
-    btnClick(3);
-}
-
-four.onclick = function(event) {
-    btnClick(4);
-}
-
-five.onclick = function(event) {
-    btnClick(5);
-}
-
-six.onclick = function(event) {
-    btnClick(6);
-}
-
-seven.onclick = function(event) {
-    btnClick(7);
-}
-
-eight.onclick = function(event) {
-    btnClick(8);
-}
-
-nine.onclick = function(event) {
-    btnClick(9);
-}
-
-point.onclick = function(event) {
-    if (matchForm.check(resultExpression.value)) {
-        del.onclick();
-        btnClick(`.`);
-    } else {
-        btnClick(`.`);
-    }
-}
-
-sumNumber.onclick = function(event) {
-    if (matchForm.check(resultExpression.value)) {
-        del.onclick();
-        btnClick(`+`);
-    } else {
-        btnClick(`+`);
-    }
-}
-
-subNumber.onclick = function(event) {
-    if (matchForm.check(resultExpression.value)) {
-        del.onclick();
-        btnClick(`-`);
-    } else {
-        btnClick(`-`);
-    }
-}
-
-division.onclick = function(event) {
-    if (matchForm.check(resultExpression.value)) {
-        del.onclick();
-        btnClick(`/`);
-    } else {
-        btnClick(`/`);
-    }
-}
-
-multiplication.onclick = function(event) {
-    if (matchForm.check(resultExpression.value)) {
-        del.onclick();
-        btnClick(`*`);
-    } else {
-        btnClick(`*`);
-    }
-}
-
-getPercent.onclick = function(event) {
-    if (matchForm.check(resultExpression.value)) {
-        del.onclick();
-        btnClick(`%`);
-    } else {
-        btnClick(`%`);
-    }
-}
-
-del.onclick = function(event) {
-    if (resultExpression) {
-    resultExpression.value = resultExpression.value.slice(0, -1);
-    }
-}
-
-document.getElementById("resultExpression").addEventListener("keydown", function(event) {
-  if (event.code === "NumpadEnter") {
-    getResult.onclick();
-   }
+    resultExpression.value = parts.join('');
 });
 
-getResult.onclick = function(event) {
-    if (resultExpression) {
-    resultExpression.value = String(matchForm.calculateExpression(resultExpression.value));
+panelButtons.addEventListener('click', (e) => {
+    e.preventDefault();
+    const btn = e.target.closest('button');
+    if (!btn) return;
+
+    const value = btn.dataset.value;
+    const action = btn.dataset.action;
+
+    if (value) {
+        handleValue(value);
+    } else if (action) {
+        handleAction(action);
     }
- }
+});
+
+function handleValue(value) {
+    const isOperator = /[+\-*/%]/.test(value);
+
+    if (value === '.') {
+        const currentNumber = resultExpression.value.split(/[+\-*/%]/).pop();
+        if (currentNumber.includes('.')) {
+            return;
+        }
+    }
+
+    if (isOperator && matchForm.check(resultExpression.value)) {
+        handleAction('backspace');
+    }
+
+    resultExpression.value += value;
+}
+
+function handleAction(action) {
+    switch (action) {
+        case 'c':
+            resultExpression.value = '';
+            break;
+
+        case 'backspace':
+            resultExpression.value = resultExpression.value.slice(0, -1);
+            break;
+
+        case '=':
+            try {
+                resultExpression.value = String(
+                    matchForm.calculateExpression(resultExpression.value)
+                );
+            } catch {
+                resultExpression.value = 'Error';
+            }
+            break;
+    }
+}
+
+resultExpression.addEventListener('keydown', (e) => {
+    if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+        e.preventDefault();
+        handleAction('=');
+    }
+});
