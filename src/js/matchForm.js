@@ -19,7 +19,7 @@ export function getPercent(number) {
 }
 
 export function check(str) {
-    const strLS = str.slice(-1);//взять последний символ строки для проверки
+    const strLS = str.slice(-1);
     if (strLS === '+' || strLS === '-' || strLS === '/' || strLS === '*' || strLS === '.' || strLS === '%') {
         return true;
     } else {
@@ -28,15 +28,12 @@ export function check(str) {
 }
 
 export function calculateExpression(expression) {
-    // Разбиение строки на операнды и операторы
     const tokens = expression.match(/\d+(\.\d+)?|%|[+\-*/]/g);
 
-    // Проверка наличия корректных токенов
     if (!tokens) {
         return 'Ошибка в выражении';
     }
 
-    // Преобразование символа процента в числовое значение
     for (let i = 0; i < tokens.length; i++) {
         if (tokens[i] === '%') {
             const prevToken = tokens[i - 1];
@@ -45,17 +42,15 @@ export function calculateExpression(expression) {
             }
             const percentValue = parseFloat(prevToken) / 100;
             tokens.splice(i - 1, 2, percentValue);
-            i--; // Уменьшение индекса, так как токены были заменены
+            i--;
         }
     }
 
-    // Выполнение операций умножения и деления
     for (let i = 0; i < tokens.length; i++) {
         if (tokens[i] === '*' || tokens[i] === '/') {
             const leftOperand = parseFloat(tokens[i - 1]);
             const rightOperand = parseFloat(tokens[i + 1]);
 
-            // Проверка валидности операндов
             if (isNaN(leftOperand) || isNaN(rightOperand)) {
                 return 'Ошибка в выражении';
             }
@@ -64,20 +59,17 @@ export function calculateExpression(expression) {
             if (tokens[i] === '*') {
                 result = leftOperand * rightOperand;
             } else {
-                // Проверка деления на ноль
                 if (rightOperand === 0) {
                     return 'Деление на ноль';
                 }
                 result = leftOperand / rightOperand;
             }
 
-            // Замена операндов и оператора на результат операции
             tokens.splice(i - 1, 3, result);
-            i -= 2; // Уменьшение индекса, так как токены были заменены
+            i -= 2;
         }
     }
 
-    // Выполнение операций сложения и вычитания
     let result = parseFloat(tokens[0]);
     for (let i = 0; i < tokens.length; i++) {
         const token = tokens[i];

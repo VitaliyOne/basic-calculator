@@ -1,4 +1,3 @@
-// скрипты
 import * as matchForm from './matchForm.js';
 
 const resultExpression = document.getElementById("resultExpression");
